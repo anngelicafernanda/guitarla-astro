@@ -20,7 +20,7 @@ const { titulo, publishedAt, contenido, imagen, url } = Astro.props
         <h3>{titulo}</h3>
         <p class="fecha">{formatearFecha(publishedAt)}</p>
         <p class="resumen">{contenido}</p>
-        <a href={`/blogs/${url}`} class="enlace">Leer Post</a>
+        <a href={`/blog/${url}`} class="enlace">Leer Post</a>
     </div>
 </article>
 
