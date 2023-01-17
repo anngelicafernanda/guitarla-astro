@@ -1,15 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Guitarra from '../components/Guitarra.astro';
+import Post from '../components/Post.astro';
 
 const urlGuitarras = `${import.meta.env.PUBLIC_API_URL}/guitarras?populate=images`
+const urlPosts = `${import.meta.env.PUBLIC_API_URL}/posts?populate=imagen`
 
-const [resGuitarras] = await Promise.all([
-fetch(urlGuitarras),
+const [resGuitarras, resPosts] = await Promise.all([
+fetch(urlGuitarras), fetch(urlPosts)
 ])
 
-const [{data: guitarras}] = await Promise.all([
-	resGuitarras.json()
+const [{data: guitarras}, {data: posts}] = await Promise.all([
+	resGuitarras.json(), resPosts.json()
 ])
 
 
@@ -30,6 +32,22 @@ const [{data: guitarras}] = await Promise.all([
 			))}
 		</div>
 	</main>
+
+	<section class="contendor">
+		<h2 class="heading">Blog</h2>
+		<div class="grid">
+			{posts?.map(post => (
+				<Post
+				titulo={post.attributes.titulo}
+				publishedAt={post.attributes.publishedAt}
+				contenido={post.attributes.contenido}
+				imagen={post.attributes.imagen.data.attributes.formats.medium.url}
+				url={post.attributes.url}
+				/>
+				
+			))}
+		</div>
+	</section>
 </Layout>
 
 <style>
