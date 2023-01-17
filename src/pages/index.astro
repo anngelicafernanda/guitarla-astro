@@ -3,6 +3,7 @@ import Layout from "../layouts/Layout.astro";
 import Guitarra from "../components/Guitarra.astro";
 import Post from "../components/Post.astro";
 import Curso from "../components/Curso.astro";
+import ComponenteReact from "../components/ComponenteReact"
 
 const urlGuitarras = `${
   import.meta.env.PUBLIC_API_URL
@@ -47,6 +48,7 @@ const [{ data: guitarras }, { data: posts }, { data: curso }] =
   contenido={curso.attributes.contenido} 
   imagen={curso.attributes.imagen.data.attributes.url}
   />
+  <ComponenteReact client:only/>
   <section class="contendor">
     <h2 class="heading">Blog</h2>
     <div class="grid">
